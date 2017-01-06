@@ -18,6 +18,10 @@ public class Produto {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
+	public int getId() {
+		return id;
+	}
+
 	private String titulo;
 	private String descricao;
 	private int paginas;

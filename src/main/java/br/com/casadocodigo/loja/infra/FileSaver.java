@@ -38,4 +38,9 @@ com o nome do arquivo. Este caminho agora precisa ser concatenado com o caminho 
  anteriormente. Observe o código:
 
 
+Tutorial MultiPart resolver
+
+http://viralpatel.net/blogs/spring-mvc-multiple-file-upload-example/
+
+
 */

@@ -15,9 +15,10 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import br.com.casadocodigo.loja.controllers.HomeController;
 import br.com.casadocodigo.loja.daos.ProdutoDao;
+import br.com.casadocodigo.loja.infra.FileSaver;
 
 @EnableWebMvc
-@ComponentScan(basePackageClasses = { HomeController.class, ProdutoDao.class })
+@ComponentScan(basePackageClasses = { HomeController.class, ProdutoDao.class , FileSaver.class})
 public class AppWebConfiguration {
 
 //	Método que mapeia nossas views.

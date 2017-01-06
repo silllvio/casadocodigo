@@ -1,5 +1,6 @@
 package br.com.casadocodigo.loja.models;
 
+import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.ElementCollection;
@@ -7,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Produto {
@@ -21,6 +24,8 @@ public class Produto {
 
 	@ElementCollection
 	private List<Preco> precos;
+	
+	private Calendar dataLancamento;
 
 	public List<Preco> getPrecos() {
 		return precos;
@@ -57,6 +62,16 @@ public class Produto {
 	@Override
 	public String toString() {
 		return "Produto [titulo=" + titulo + ", descricao=" + descricao + ", paginas=" + paginas + "]";
+	}
+
+//	@DateTimeFormat(pattern="dd/MM/yyyy") A mehor prática é criar esse parametro como método no AppConfiguration.
+	@DateTimeFormat
+	public Calendar getDataLancamento() {
+		return dataLancamento;
+	}
+
+	public void setDataLancamento(Calendar dataLancamento) {
+		this.dataLancamento = dataLancamento;
 	}
 
 }

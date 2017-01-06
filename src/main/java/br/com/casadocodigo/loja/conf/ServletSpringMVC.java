@@ -1,6 +1,8 @@
 package br.com.casadocodigo.loja.conf;
 
 import javax.servlet.Filter;
+import javax.servlet.MultipartConfigElement;
+import javax.servlet.ServletRegistration.Dynamic;
 
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
@@ -13,16 +15,22 @@ public class ServletSpringMVC extends AbstractAnnotationConfigDispatcherServletI
 		return null;
 	}
 
+//	Método que passa as configuração da aplicação para a Servelt.
+	
 	@Override
 	protected Class<?>[] getServletConfigClasses() {
 	    return new Class[] {AppWebConfiguration.class, JPAConfiguration.class};
 	}
 
+//	Método que passa os request do TomCat para o Spring
+	
 	@Override
 	protected String[] getServletMappings() {
 		 return new String[] {"/"};
 	}
 
+	
+//	Filtro da requisição para o padrão utf8
 	
 	  @Override
 	    protected Filter[] getServletFilters() {
@@ -30,6 +38,14 @@ public class ServletSpringMVC extends AbstractAnnotationConfigDispatcherServletI
 	        encodingFilter.setEncoding("UTF-8");
 	        return new Filter[] {encodingFilter};
 	    }
+	  
+//	  Método para registrar os arquivos MultiPart
+	  
+	    @Override
+	    protected void customizeRegistration(Dynamic registration) {
+	        registration.setMultipartConfig(new MultipartConfigElement(""));
+	    }
+	  
 }
 
 

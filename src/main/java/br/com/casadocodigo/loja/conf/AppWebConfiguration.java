@@ -8,6 +8,8 @@ import org.springframework.format.datetime.DateFormatter;
 import org.springframework.format.datetime.DateFormatterRegistrar;
 import org.springframework.format.support.DefaultFormattingConversionService;
 import org.springframework.format.support.FormattingConversionService;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
@@ -50,6 +52,14 @@ public class AppWebConfiguration {
 
 	    return conversionService;
 	}
+	
+//		Método para resolver URL de importação de arquivos.
+	
+	 @Bean
+	    public MultipartResolver multipartResolver(){
+	        return new StandardServletMultipartResolver();
+	    }
+	
 }
 
 /**
@@ -84,6 +94,15 @@ public class AppWebConfiguration {
  * configuração para não termos que nos preocupar com isto.
  * 
  * 
+ * 
+ * MultiPartResolver
+ * 
+ * Observação: MultipartResolver se refere a um resolvedor de dados multimidia. Quando temos texto e arquivos por exemplo.
+ *  Os arquivos podem ser: imagem, PDF e outros. Este objeto é que identifica cada um dos recursos enviados e nos fornece 
+ *  uma forma mais simples de manipulalos.
+ *  
+ *  Mesmo tendo feito a configuração do multipartResolver, o Spring ainda não consegue fazer a conversão dos dados. Teremos 
+ *  que configurar mais algumas coisas. Na Servlet.
  * 
  * 
  */

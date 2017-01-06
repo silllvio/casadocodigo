@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Component
 public class FileSaver {
+
     @Autowired
     private HttpServletRequest request;
 
@@ -19,14 +20,14 @@ public class FileSaver {
             String realPath = request.getServletContext().getRealPath("/"+baseFolder);
             String path = realPath + "/" + file.getOriginalFilename();
             file.transferTo(new File(path));
-            return baseFolder + "/" + file.getOriginalFilename();
+            return path;
 
         } catch (IllegalStateException | IOException e) {
             throw new RuntimeException(e);
         }
     }
-}
 
+}
 /**
 
 

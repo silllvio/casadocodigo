@@ -19,7 +19,7 @@ public class Produto {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + id;
+		result = prime * result + getId();
 		return result;
 	}
 
@@ -34,7 +34,7 @@ public class Produto {
 		if (getClass() != obj.getClass())
 			return false;
 		Produto other = (Produto) obj;
-		if (id != other.id)
+		if (getId() != other.getId())
 			return false;
 		return true;
 	}
@@ -115,6 +115,12 @@ public class Produto {
 
 	public BigDecimal precoPara(TipoPreco tipoPreco) {
 	    return precos.stream().filter(preco -> preco.getTipo().equals(tipoPreco)).findFirst().get().getValor();        
+	}
+
+
+
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 }

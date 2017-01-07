@@ -42,6 +42,8 @@
 </head>
 <body class="produto">
 
+<li><a href="/cart" rel="nofollow">Carrinho (${carrinhoCompras.quantidade}) </a></li>
+
 	<header id="product-highlight" class="clearfix">
 		<div id="product-overview" class="container">
 			<img itemprop="image" width="280px" height="395px"
@@ -93,7 +95,8 @@
 
 
 		<section class="buy-options clearfix">
-			<form action="/carrinho/add" method="post" class="container">
+			<form action='<c:url value="/carrinho/add" />' method="post"
+				class="container">
 				<ul id="variants" class="clearfix">
 					<input type="hidden" name="produtoId" value="${produto.id}" />
 					<c:forEach items="${produto.precos}" var="preco">

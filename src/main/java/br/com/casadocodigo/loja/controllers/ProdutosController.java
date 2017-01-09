@@ -87,13 +87,15 @@ public class ProdutosController {
 		modelAndView.addObject("produto", produto);
 		return modelAndView;
 	}
+
 	
-	@RequestMapping("/{id}")
-	@ResponseBody
-	public Produto detalheJson(@PathVariable("id") int id) {
-		Produto produto = produtoDao.find(id);
-		return produto;
-	}
+//	A melhor prática é criar um ContentNegotiationViewResolver.
+//	@RequestMapping("/{id}")
+//	@ResponseBody
+//	public Produto detalheJson(@PathVariable("id") int id) {
+//		Produto produto = produtoDao.find(id);
+//		return produto;
+//	}
 
 }
 

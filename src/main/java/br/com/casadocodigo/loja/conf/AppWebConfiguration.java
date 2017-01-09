@@ -1,8 +1,10 @@
 package br.com.casadocodigo.loja.conf;
 
+import java.util.concurrent.TimeUnit;
+
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
+import org.springframework.cache.guava.GuavaCacheManager;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -19,6 +21,8 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+import com.google.common.cache.CacheBuilder;
+
 import br.com.casadocodigo.loja.controllers.HomeController;
 import br.com.casadocodigo.loja.daos.ProdutoDao;
 import br.com.casadocodigo.loja.infra.FileSaver;
@@ -26,71 +30,72 @@ import br.com.casadocodigo.loja.models.CarrinhoCompras;
 
 @EnableWebMvc
 @EnableCaching
-@ComponentScan(basePackageClasses={HomeController.class, ProdutoDao.class, FileSaver.class, CarrinhoCompras.class})
+@ComponentScan(basePackageClasses = { HomeController.class, ProdutoDao.class, FileSaver.class, CarrinhoCompras.class })
 public class AppWebConfiguration extends WebMvcConfigurerAdapter {
 
-//	Método que mapeia nossas views.
-	
-	@Bean
-	public InternalResourceViewResolver internalResourceViewResolver(){
-	    InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-	    resolver.setPrefix("/WEB-INF/views/");
-	    resolver.setSuffix(".jsp");
-	    resolver.setExposedContextBeanNames("carrinhoCompras");
-	    return resolver;
-	}
-//	Método padrão de retorno de erros
-	
-	@Bean
-	public MessageSource messageSource(){
-	    ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
-	    messageSource.setBasename("/WEB-INF/messages");
-	    messageSource.setDefaultEncoding("UTF-8");
-	    messageSource.setCacheSeconds(1);
-	    return messageSource;
-	}
-	
-//		Método para converter as datas
-	
-	@Bean
-	public FormattingConversionService mvcConversionService(){
-	    DefaultFormattingConversionService conversionService = new DefaultFormattingConversionService();
-	    DateFormatterRegistrar formatterRegistrar = new DateFormatterRegistrar();
-	    formatterRegistrar.setFormatter(new DateFormatter("dd/MM/yyyy"));
-	    formatterRegistrar.registerFormatters(conversionService);
+	// Método que mapeia nossas views.
 
-	    return conversionService;
+	@Bean
+	public InternalResourceViewResolver internalResourceViewResolver() {
+		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+		resolver.setPrefix("/WEB-INF/views/");
+		resolver.setSuffix(".jsp");
+		resolver.setExposedContextBeanNames("carrinhoCompras");
+		return resolver;
 	}
-	
-//		Método para resolver URL de importação de arquivos.
-	
-	 @Bean
-	    public MultipartResolver multipartResolver(){
-	        return new StandardServletMultipartResolver();
-	    }
-	
-	 
-//	 Método essencial para roda JS
-	 
-	 @Override
-	    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
-	        configurer.enable();
-	    }
-	 
-	    @Bean
-	    public RestTemplate restTemplate(){
-	        return new RestTemplate();
-	    }
+	// Método padrão de retorno de erros
 
-	 
-	    // Método de teste de gerenciamento do Cache.
-	    
-	    @Bean
-	    public CacheManager cachemananger(){
-	    	return new ConcurrentMapCacheManager();
-	    }
+	@Bean
+	public MessageSource messageSource() {
+		ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
+		messageSource.setBasename("/WEB-INF/messages");
+		messageSource.setDefaultEncoding("UTF-8");
+		messageSource.setCacheSeconds(1);
+		return messageSource;
+	}
+
+	// Método para converter as datas
+
+	@Bean
+	public FormattingConversionService mvcConversionService() {
+		DefaultFormattingConversionService conversionService = new DefaultFormattingConversionService();
+		DateFormatterRegistrar formatterRegistrar = new DateFormatterRegistrar();
+		formatterRegistrar.setFormatter(new DateFormatter("dd/MM/yyyy"));
+		formatterRegistrar.registerFormatters(conversionService);
+
+		return conversionService;
+	}
+
+	// Método para resolver URL de importação de arquivos.
+
+	@Bean
+	public MultipartResolver multipartResolver() {
+		return new StandardServletMultipartResolver();
+	}
+
+	// Método essencial para roda JS
+
+	@Override
+	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+		configurer.enable();
+	}
+
+	@Bean
+	public RestTemplate restTemplate() {
+		return new RestTemplate();
+	}
+
+	// Método de cache do Google.
+
+	@Bean
+	public CacheManager cacheManager() {
+		CacheBuilder<Object, Object> builder = CacheBuilder.newBuilder().maximumSize(100).expireAfterAccess(5,
+				TimeUnit.MINUTES);
+		GuavaCacheManager manager = new GuavaCacheManager();
+		manager.setCacheBuilder(builder);
+		return manager;
+	}
 }
-
 /**
  * Classe de configuração da aplicação.
  * 
@@ -126,12 +131,18 @@ public class AppWebConfiguration extends WebMvcConfigurerAdapter {
  * 
  * MultiPartResolver
  * 
- * Observação: MultipartResolver se refere a um resolvedor de dados multimidia. Quando temos texto e arquivos por exemplo.
- *  Os arquivos podem ser: imagem, PDF e outros. Este objeto é que identifica cada um dos recursos enviados e nos fornece 
- *  uma forma mais simples de manipulalos.
- *  
- *  Mesmo tendo feito a configuração do multipartResolver, o Spring ainda não consegue fazer a conversão dos dados. Teremos 
- *  que configurar mais algumas coisas. Na Servlet.
+ * Observação: MultipartResolver se refere a um resolvedor de dados multimidia.
+ * Quando temos texto e arquivos por exemplo. Os arquivos podem ser: imagem, PDF
+ * e outros. Este objeto é que identifica cada um dos recursos enviados e nos
+ * fornece uma forma mais simples de manipulalos.
+ * 
+ * Mesmo tendo feito a configuração do multipartResolver, o Spring ainda não
+ * consegue fazer a conversão dos dados. Teremos que configurar mais algumas
+ * coisas. Na Servlet.
  * 
  * 
+ * // Método de teste de gerenciamento do Cache.
+ * 
+ * @Bean public CacheManager cachemananger(){ return new
+ *       ConcurrentMapCacheManager(); }
  */

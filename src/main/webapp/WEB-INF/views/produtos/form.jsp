@@ -10,12 +10,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
+<c:url value="/resources/bootstrap/css" var ="cssPath" />
+<link rel="stylesheet"
+	href="${cssPath}/bootstrap.min.css">
+<link rel="stylesheet"
+	href="${cssPath}/bootstrap-theme.min.css">
+
 <title>Livros de Java, Android, iPhone, Ruby, PHP e muito mais -
 	Casa do Código</title>
 </head>
 <body>
 
-<!-- 	Precisamos falar que o tipo de formuário e Multipart -->
+	<!-- 	Precisamos falar que o tipo de formuário e Multipart -->
 
 	<form:form action="${ s:mvcUrl('PC#gravar').build() }" method="post"
 		commandName="produto" enctype="multipart/form-data">
@@ -47,9 +54,9 @@
 					value="${tipoPreco}" />
 			</div>
 		</c:forEach>
-			<div>
-				<label>Sumário</label> <input name="sumario" type="file" />
-			</div>
+		<div>
+			<label>Sumário</label> <input name="sumario" type="file" />
+		</div>
 		<button type="submit">Cadastrar</button>
 	</form:form>
 </body>

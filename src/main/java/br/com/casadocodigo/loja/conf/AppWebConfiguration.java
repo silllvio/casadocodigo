@@ -77,7 +77,7 @@ public class AppWebConfiguration extends WebMvcConfigurerAdapter {
 		return new StandardServletMultipartResolver();
 	}
 
-	// Método essencial para roda JS
+	// Método essencial para roda JS e BootStrap
 
 	@Override
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {

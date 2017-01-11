@@ -21,7 +21,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-		http.authorizeRequests().antMatchers("/produtos/form").hasAnyRole("ADMIN").antMatchers("/carrinho").permitAll()
+		http.authorizeRequests().antMatchers("/produtos/form").hasAnyRole("ADMIN").antMatchers("/carrinho/**").permitAll()
 				.antMatchers(HttpMethod.POST, "/produtos").hasAnyRole("ADMIN").antMatchers(HttpMethod.GET, "/produtos")
 				.permitAll().antMatchers("/produtos/**").permitAll().antMatchers("/").permitAll()
 				.antMatchers("/resources/css/**", "/resources/js/**", "/resources/images/**").permitAll()

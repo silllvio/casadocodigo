@@ -10,14 +10,14 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 public class ServletSpringMVC extends AbstractAnnotationConfigDispatcherServletInitializer {
 
 	protected Class<?>[] getRootConfigClasses() {
-	    return new Class[]{SecurityConfiguration.class};
+	    return new Class[]{SecurityConfiguration.class,AppWebConfiguration.class, JPAConfiguration.class};
 	}
 
 //	Método que passa as configuração da aplicação para a Servelt.
 	
 	@Override
 	protected Class<?>[] getServletConfigClasses() {
-	    return new Class[] {AppWebConfiguration.class, JPAConfiguration.class};
+	    return new Class[] {};
 	}
 
 //	Método que passa os request do TomCat para o Spring

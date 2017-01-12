@@ -17,8 +17,6 @@
 	type="image/ico" />
 <link href="https://plus.googlecom/108540024862647200608"
 	rel="publisher" />
-<title>Livros de Java, SOA, Android, iPhone, Ruby on Rails e
-	muito mais - Casa do Código</title>
 <link href="${contextPath}resources/css/cssbase-min.css"
 	rel="stylesheet" type="text/css" media="all" />
 <link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700'
@@ -44,7 +42,7 @@
 <link rel="canonical" href="http://www.casadocodigo.com.br/" />
 </head>
 
-<tags:pageTemplate >
+<tags:pageTemplate titulo = "Carrinho" >
 
 	<section class="container middle">
 		<h2 id="cart-title">Seu carrinho de compras</h2>

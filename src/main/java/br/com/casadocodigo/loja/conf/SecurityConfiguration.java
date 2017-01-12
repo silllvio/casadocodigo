@@ -25,21 +25,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers("/produtos/form").hasAnyRole("ADMIN").antMatchers("/carrinho/**").permitAll()
 				.antMatchers(HttpMethod.POST, "/produtos").hasAnyRole("ADMIN").antMatchers(HttpMethod.GET, "/produtos")
 				.permitAll().antMatchers("/produtos/**").permitAll().antMatchers("/").permitAll()
-				.antMatchers("/resources/css/**", "/resources/js/**", "/resources/images/**").permitAll()
-				.antMatchers("/resources/bootstrap/css/**", "/resources/bootstrap/js/**", "bootstrap/images/**")
-				.permitAll().anyRequest().authenticated().and().formLogin().loginPage("/login").permitAll()
+				.antMatchers("/resources/**").permitAll()
+				.anyRequest().authenticated().and().formLogin().loginPage("/login").permitAll()
 				.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout") )		;
 	}
-
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(usuarioDao)
 		.passwordEncoder(new BCryptPasswordEncoder()); // Encryptação padrão do Spring.
-		
-		
 	}	
-	
-	
-	
-	
 }

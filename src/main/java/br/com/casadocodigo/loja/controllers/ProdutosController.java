@@ -2,14 +2,15 @@ package br.com.casadocodigo.loja.controllers;
 
 import java.util.List;
 
+import javax.persistence.NoResultException;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -85,9 +86,27 @@ public class ProdutosController {
 		ModelAndView modelAndView = new ModelAndView("/produtos/detalhe");
 		Produto produto = produtoDao.find(id);
 		modelAndView.addObject("produto", produto);
+		
+//		if(true) throw new RuntimeException("Exceção genérica acontecendo");
+		
 		return modelAndView;
 	}
-
+	
+	
+	@ExceptionHandler(NoResultException.class)
+	public ModelAndView trataDetalheNaoEcontrado(Exception exception){
+		
+		System.out.println("Erro na busca de produtos");
+		exception.printStackTrace();
+				
+		ModelAndView modelAndView = new ModelAndView("/produtos/errorProd");
+		modelAndView.addObject("exception",exception);
+		return modelAndView;
+		
+	}
+	
+	
+	
 	
 //	A melhor prática é criar um ContentNegotiationViewResolver.
 //	@RequestMapping("/{id}")

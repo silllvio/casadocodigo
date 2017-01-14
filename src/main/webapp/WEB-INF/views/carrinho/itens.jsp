@@ -91,7 +91,7 @@
 			</tbody>
 			<tfoot>
 				<tr>
-					<td colspan="3"><
+					<td colspan="3">
 						<form:form action="${s:mvcUrl('PC#finalizar').build()}" method="post">
 							<input type="submit" class="checkout" name="checkout"
 								value="Finalizar compra" />

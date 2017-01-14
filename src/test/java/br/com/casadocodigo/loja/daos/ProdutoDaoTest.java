@@ -49,8 +49,6 @@ public class ProdutoDaoTest {
 //		Compara o retorno do banco de dados com o que gravamos.
 		Assert.assertEquals(new  BigDecimal(40).setScale(2), valor);
 		
-		
 	} 
-	
 	
 }

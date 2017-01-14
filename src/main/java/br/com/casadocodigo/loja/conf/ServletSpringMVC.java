@@ -14,7 +14,8 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 public class ServletSpringMVC extends AbstractAnnotationConfigDispatcherServletInitializer {
 
 	protected Class<?>[] getRootConfigClasses() {
-	    return new Class[]{SecurityConfiguration.class,AppWebConfiguration.class, JPAConfiguration.class};
+	    return new Class[]{SecurityConfiguration.class,AppWebConfiguration.class, JPAConfiguration.class,
+	    		JPAProductionConfiguration.class};
 	}
 
 //	Método que passa as configuração da aplicação para a Servelt.
@@ -50,15 +51,15 @@ public class ServletSpringMVC extends AbstractAnnotationConfigDispatcherServletI
 	
 
 //	    Inicia o profile de dev quando a aplicação iniciar
-	    @Override
-	    public void onStartup(ServletContext servletContext) throws ServletException {
-	    	super.onStartup(servletContext);
-	    	servletContext.addListener(RequestContextListener.class);
-	    	servletContext.setInitParameter("spring.profiles.active", "dev");
-	    }
+//	    @Override
+//	    public void onStartup(ServletContext servletContext) throws ServletException {
+//	    	super.onStartup(servletContext);
+//	    	servletContext.addListener(RequestContextListener.class);
+//	    	servletContext.setInitParameter("spring.profiles.active", "dev");
+//	    }
 }
 
-
+	
 /**
 
 Configuração via Servlet para que o TomCat passe requisições para o SpringMVC.

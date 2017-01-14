@@ -138,41 +138,56 @@
 			<artifactId>spring-context-support</artifactId>
 			<version>4.1.0.RELEASE</version>
 		</dependency>
-		
-		
-<!-- 		Módulo de segurança do Spring -->
-		
-		
-		
-	<dependency>
-    <groupId>org.springframework.security</groupId>
-    <artifactId>spring-security-config</artifactId>
-    <version>4.1.4.RELEASE</version>
-</dependency>
 
-<dependency>
-    <groupId>org.springframework.security</groupId>
-    <artifactId>spring-security-taglibs</artifactId>
-    <version>4.1.0.RELEASE</version>
-</dependency>
 
-<dependency>
-    <groupId>org.springframework.security</groupId>
-    <artifactId>spring-security-web</artifactId>
-    <version>4.1.0.RELEASE</version>
-</dependency>
+		<!-- Módulo de segurança do Spring -->
 
-<dependency>
-    <groupId>org.springframework.security</groupId>
-    <artifactId>spring-security-core</artifactId>
-    <version>4.1.0.RELEASE</version>
-</dependency>
-		
-		
-		
+
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>4.1.4.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+			<version>4.1.0.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>4.1.0.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>4.1.0.RELEASE</version>
+		</dependency>
+
+
+		<!-- https://mvnrepository.com/artifact/junit/junit -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>4.3.2.RELEASE</version>
+			<scope>test</scope>
+		</dependency>
+
+
 	</dependencies>
-	
-		<dependencyManagement>
+
+	<dependencyManagement>
 		<dependencies>
 			<dependency>
 				<groupId>org.springframework</groupId>
@@ -183,12 +198,13 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-	
+
 
 </project>
 
 
-<!-- Uma das dependências é o próprio Guava. A outra será uma biblioteca que faz a integração 
-do mesmo com o Spring. O próximo passo para configurar o Guava em nosso projeto é instanciá-lo
- com as configurações do cache no mesmo lugar, onde estávamos criando o ConcurrentMapCacheManager, 
- no método cacheManager da classe AppWebConfiguration. -->
+<!-- Uma das dependências é o próprio Guava. A outra será uma biblioteca 
+	que faz a integração do mesmo com o Spring. O próximo passo para configurar 
+	o Guava em nosso projeto é instanciá-lo com as configurações do cache no 
+	mesmo lugar, onde estávamos criando o ConcurrentMapCacheManager, no método 
+	cacheManager da classe AppWebConfiguration. -->

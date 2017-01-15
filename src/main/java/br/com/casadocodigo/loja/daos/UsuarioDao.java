@@ -28,4 +28,11 @@ public class UsuarioDao implements UserDetailsService {
 		}
 		return usuarios.get(0);
 	}
+
+	public void gravar(Usuario usuario) {
+		
+		System.out.println("usuarioDao método grava chamado!");
+		
+	    manager.persist(usuario);
+	}
 }
